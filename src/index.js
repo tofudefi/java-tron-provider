@@ -7,8 +7,10 @@ import providerFromEngine from "./providerFromEngine.js";
 import createAsyncMiddleware from "json-rpc-engine/src/createAsyncMiddleware.js";
 import ethRpcErrors from "eth-rpc-errors";
 import allMethods from "./methods/index.js";
+import { address } from "./methods/utils/index.js";
 import autoRetry from "./methods/autoRetry.js";
 export { networks, getNetwork } from "./networks.js";
+export { address as ethAddress };
 
 export { createContext, providerFromEngine };
 
