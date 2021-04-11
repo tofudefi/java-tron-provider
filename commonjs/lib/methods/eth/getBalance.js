@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eth_getBalance = void 0;
 const index_js_1 = require("../utils/index.js");
-const tron_eth_conversions_1 = require("@opentron/tron-eth-conversions");
+const ethAddress = require("../utils/index.js");
 /**
  * eth_getBalance
  * Returns the balance of the account of given address.
@@ -17,7 +17,7 @@ exports.eth_getBalance = async ([account, blockNum], ctx) => {
         index_js_1.warn(`eth_getBalance does not support historical balance "${blockNum}", second argument defaulted to "latest"`);
     }
     // not relevant for Tron...
-    const address = tron_eth_conversions_1.ethAddress.toTronHex(account);
+    const address = ethAddress.toTronHex(account);
     // Let's return price in sun for 1 energy/bandwidth
     const { data } = await ctx.tronClient.post(`/wallet/getaccount`, { address });
     // contract account

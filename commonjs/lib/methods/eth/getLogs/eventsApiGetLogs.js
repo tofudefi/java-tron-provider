@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const querystring_1 = __importDefault(require("querystring"));
 const index_js_1 = require("../../utils/index.js");
-const tron_eth_conversions_1 = require("@opentron/tron-eth-conversions");
+const ethAddress = require("../../utils/address.js");
 function buildUrl(filterObject, { page = 1, limit = 200 } = {}) {
     const opts = {
         limit,
@@ -17,7 +17,7 @@ function buildUrl(filterObject, { page = 1, limit = 200 } = {}) {
     }
     const filterByContractAddress = () => {
         if (filterObject.contractAddress) {
-            return `/contract/${tron_eth_conversions_1.ethAddress.toTron(filterObject.contractAddress)}`;
+            return `/contract/${ethAddress.toTron(filterObject.contractAddress)}`;
         }
         return "";
     };
@@ -60,7 +60,7 @@ tron log looks like:
 */
 function fromTronLog(tronLog, idx) {
     return {
-        address: tron_eth_conversions_1.ethAddress.fromTron(tronLog.contractAddress),
+        address: ethAddress.fromTron(tronLog.contractAddress),
         blockNumber: index_js_1.numberToHex(tronLog.blockNumber),
         data: `0x${tronLog.data}`,
         // TODO: that will give the index in tron api response not in block, oops

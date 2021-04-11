@@ -11,7 +11,7 @@ exports.eth_getTransactionByHash = void 0;
 var getTransaction_js_1 = require("../getTransaction.js");
 Object.defineProperty(exports, "eth_getTransactionByHash", { enumerable: true, get: function () { return getTransaction_js_1.eth_getTransactionByHash; } });
 const index_js_1 = require("../../utils/index.js");
-const tron_eth_conversions_1 = require("@opentron/tron-eth-conversions");
+const ethAddress = require("../../utils/address.js");
 const blockNumToHash_js_1 = __importDefault(require("../../utils/blockNumToHash.js"));
 const p_limit_1 = __importDefault(require("p-limit"));
 const promise_retry_1 = __importDefault(require("promise-retry"));
@@ -58,7 +58,7 @@ const debug = debug_1.default("java-tron-provider");
 // TODO: refactor to use utils/transactionReceipt.js fromTronLog?
 const tronTxInfoToEthLogs = (txInfo, txIndex) => {
     return txInfo.log.map((log, idx) => ({
-        address: tron_eth_conversions_1.ethAddress.fromTronHex(txInfo.contract_address),
+        address: ethAddress.fromTronHex(txInfo.contract_address),
         // TODO: blockHash not on txInfo...
         // blockHash: txInfo.
         blockNumber: index_js_1.numberToHex(txInfo.blockNumber),

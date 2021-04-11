@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eth_sendTransaction = void 0;
 const eth_rpc_errors_1 = __importDefault(require("eth-rpc-errors"));
-const tron_eth_conversions_1 = require("@opentron/tron-eth-conversions");
+const ethAddress = require("../utils/address.js");
 const web3_1 = __importDefault(require("web3"));
 const tron_crypto_js_1 = require("../utils/tron-crypto.js");
 const { hexToNumber } = web3_1.default.utils;
@@ -16,8 +16,8 @@ const { ethErrors } = eth_rpc_errors_1.default;
 // TODO: replace with client side protobuf....
 async function createTransaction({ from, to, amount }, ctx) {
     const { data } = await ctx.tronClient.post(`/wallet/createtransaction`, {
-        to_address: tron_eth_conversions_1.ethAddress.toTronHex(to),
-        owner_address: tron_eth_conversions_1.ethAddress.toTronHex(from),
+        to_address: ethAddress.toTronHex(to),
+        owner_address: ethAddress.toTronHex(from),
         amount,
     });
     return data;
@@ -131,7 +131,7 @@ async function sendCreateSmartContractTransaction(txInput = {}, ctx) {
         // TODO: how do we actually get the ABI... it's not passed to the provider normally...
         // abi: "",
         bytecode,
-        owner_address: tron_eth_conversions_1.ethAddress.toTronHex(txInput.from),
+        owner_address: ethAddress.toTronHex(txInput.from),
         // TODO: dont hardcode.. use gasLimit for that value?
         origin_energy_limit: DEFAULT_FEE_LIMIT,
         // TODO: dont hardcode.. use gasLimit for that value?
@@ -162,8 +162,8 @@ async function sendTriggerSmartContractTransaction(txInput = {}, ctx) {
     // TODO: refactor: reduce code duplication with eth_call?
     const body = {
         visible: false,
-        contract_address: tron_eth_conversions_1.ethAddress.toTronHex(txInput.to),
-        owner_address: tron_eth_conversions_1.ethAddress.toTronHex(txInput.from),
+        contract_address: ethAddress.toTronHex(txInput.to),
+        owner_address: ethAddress.toTronHex(txInput.from),
         data: txInput.data.substr(2),
         // TODO: dont hardcode.. use gasLimit for that value?
         fee_limit: DEFAULT_FEE_LIMIT,
