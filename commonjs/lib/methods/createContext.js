@@ -8,11 +8,11 @@ const axios_1 = __importDefault(require("axios"));
 function networkToTronApiUrl(network = "mainnet") {
     switch (network) {
         case "mainnet":
-            return "https://tron.oikos.cash";
+            return "https://api.trongrid.io";
         case "shasta":
             return "https://api.shasta.trongrid.io";
         case "nile":
-            return "https://java-tron-nile.opentron.org";
+            return "https://api.nileex.io";
         default:
             throw new Error(`Unknown Tron network "${network}", no API url mapping found`);
     }
