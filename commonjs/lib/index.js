@@ -4,9 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createJavaTronEngine = exports.createJavaTronMiddleware = exports.providerFromEngine = exports.createContext = exports.getNetwork = exports.networks = void 0;
+exports.createJavaTronEngine = exports.createJavaTronMiddleware = exports.providerFromEngine = exports.createContext = exports.getNetwork = exports.networks = exports.ethAddress = void 0;
 const createContext_js_1 = __importDefault(require("./methods/createContext.js"));
 exports.createContext = createContext_js_1.default;
+const ethAddress_js_1 = require("./methods/utils/address.js");
+exports.ethAddress = ethAddress_js_1;
 const debug_1 = __importDefault(require("debug"));
 const json_rpc_engine_1 = __importDefault(require("json-rpc-engine"));
 const providerFromEngine_js_1 = __importDefault(require("./providerFromEngine.js"));
