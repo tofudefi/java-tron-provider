@@ -19,6 +19,7 @@ export { eth_sendTransaction } from "./sendTransaction.js";
 export { eth_subscribe } from "./subscribe.js";
 export { eth_getBalance } from "./getBalance.js";
 export { eth_chainId } from "./chainId.js";
+export { eth_estimateGas } from "./estimateGas.js";
 // import qs from "querystring";
 
 // just hardcoded to the protocol version returned by infura.io at time of writing htis

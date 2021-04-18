@@ -38,6 +38,8 @@ var getBalance_js_1 = require("./getBalance.js");
 Object.defineProperty(exports, "eth_getBalance", { enumerable: true, get: function () { return getBalance_js_1.eth_getBalance; } });
 var chainId_js_1 = require("./chainId.js");
 Object.defineProperty(exports, "eth_chainId", { enumerable: true, get: function () { return chainId_js_1.eth_chainId; } });
+var estimateGas_js_1 = require("./estimateGas.js");
+Object.defineProperty(exports, "eth_estimateGas", { enumerable: true, get: function () { return estimateGas_js_1.eth_estimateGas; } })
 // import qs from "querystring";
 // just hardcoded to the protocol version returned by infura.io at time of writing htis
 const PROTOCOL_VERSION = "0x40";
