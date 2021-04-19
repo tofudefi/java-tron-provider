@@ -2,6 +2,7 @@ import {
   address as ethAddress,
   warn,
   maybeThrowJavaTronError,
+  hexToNumber,
 } from "../utils/index.js";
 import ethRpcErrors from "eth-rpc-errors";
 
