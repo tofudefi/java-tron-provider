@@ -38,12 +38,10 @@ export const sunToWei = (n) => {
 
 export function maybeThrowJavaTronError(data) {
   const { ethErrors } = ethRpcErrors;
-  if (
-    typeof data === "object" &&
-    data.result &&
-    data.result.code &&
-    data.result.message
-  ) {
+  // sometimes error look like `{ code ,txid, message }` and sometimes
+  // like `{ result: { code, txid, message } }` ....
+  const result = data.result || data;
+  if (typeof result === "object" && result && result.code && result.message) {
     // TODO: map java-tron error codes to correct rpc errors...
 
     // TODO: handle this res:
@@ -51,8 +49,8 @@ export function maybeThrowJavaTronError(data) {
        {"result":{"code":"CONTRACT_VALIDATE_ERROR","message":"No contract or not a smart contract"}}
      */
     throw ethErrors.rpc.resourceNotFound({
-      message: `${data.result.code}: ${data.result.message}`,
-      data: data.result,
+      message: `${result.code}: ${result.message}`,
+      data: result,
     });
   }
 }
