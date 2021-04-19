@@ -85,6 +85,17 @@ export const eth_call = async (
     visible: true,
     contract_address: ethAddress.toTron(to),
     // function_selector: "isOwnerMe()",
+    //
+    // NOTE: passing call_value actually makes the transaction "fail" with a
+    // warning message like:
+    //
+    //  result: {
+    //    result: true,
+    //    message: 'constant cannot set call value or call token value.'
+    //  },
+    //
+    //  But constant_result still contains the correct result, lol!
+    call_value: hexToNumber(value || "0x0"),
     data: data.substr(2), // strip leading 0x
     // TODO: we can remove `parameter` actually...
     parameter,
@@ -92,13 +103,14 @@ export const eth_call = async (
   if (from) {
     body.owner_address = ethAddress.toTron(from);
   } else {
-    // TODO: make sure hardcoding a dummy address doesn't affect the call result
-    // Tron requires a owner address where as it's optional in ethereum...
-    // maybe use 0 address?
-    body.owner_address = "TB92TBNsqaVQVcJW8P9s2yntKXFLiVk7M2";
+    // Default to address 0...
+    // ethAddress.toTron("0x0000000000000000000000000000000000000000")
+    body.owner_address = "T9yD14Nj9j7xAB4dbGeiX9h8unkKHxuWwb";
   }
+
   const { data: res } = await ctx.tronClient.post(
     `/wallet/triggerconstantcontract`,
+    // `/wallet/triggerconstantcontract`,
     body
   );
   maybeThrowJavaTronError(res);
