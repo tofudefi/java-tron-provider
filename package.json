@@ -1,6 +1,6 @@
 {
   "name": "@tofudefi/java-tron-provider",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Web3 provider that uses the `java-tron` HTTP API.",
   "repository": "https://github.com/tofudefi/java-tron-provider.git",
   "type": "module",

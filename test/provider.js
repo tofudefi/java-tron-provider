@@ -26,5 +26,5 @@ test("web3_clientVersion nile", async (t) => {
     params: [],
     id: 1,
   });
-  t.deepEqual(res, { id: 1, result: "4.1.3", jsonrpc: undefined });
+  t.deepEqual(res, { id: 1, result: "4.2.0", jsonrpc: undefined });
 });
