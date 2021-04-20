@@ -9,9 +9,14 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eth_sendRawTransaction = void 0;
 __exportStar(require("./getTransaction.js"), exports);
+const eth_rpc_errors_1 = __importDefault(require("eth-rpc-errors"));
+const { ethErrors } = eth_rpc_errors_1.default;
 /**
  * eth_sendRawTransaction
  * Creates new message call transaction or a contract creation for signed transactions.
@@ -78,6 +83,9 @@ exports.eth_sendRawTransaction = async ([txData], ctx) => {
         // strip leading "0x"
         transaction: txData.substr(2),
     });
-    // console.log(data);
+    if (data.Error) {
+        console.warn("eth_sendRawTransaction is partially implemented, it calls /wallet/broadcasthex directly which means it will fail if it is passed an Ethereum transaction");
+        throw ethErrors.rpc.transactionRejected({ message: data.Error, data });
+    }
     return data.txid;
 };

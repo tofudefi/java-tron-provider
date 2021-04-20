@@ -1,4 +1,7 @@
 export * from "./getTransaction.js";
+import ethRpcErrors from "eth-rpc-errors";
+
+const { ethErrors } = ethRpcErrors;
 
 /**
  * eth_sendRawTransaction
@@ -66,6 +69,11 @@ export const eth_sendRawTransaction = async ([txData], ctx) => {
     // strip leading "0x"
     transaction: txData.substr(2),
   });
-  // console.log(data);
+  if (data.Error) {
+    console.warn(
+      "eth_sendRawTransaction is partially implemented, it calls /wallet/broadcasthex directly which means it will fail if it is passed an Ethereum transaction"
+    );
+    throw ethErrors.rpc.transactionRejected({ message: data.Error, data });
+  }
   return data.txid;
 };
