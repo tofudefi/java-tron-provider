@@ -28,5 +28,10 @@ export const eth_getBalance = async ([account, blockNum], ctx) => {
   // TODO: we probably should not convert to wei... just need to adjust number formatting in UI
   const balance = toBN(data.balance || 0);
 
+  // Most ethereum tools crash if negative balance returned so we return 0 instead...
+  if (balance.lt(toBN(0))) {
+    return formatQuantity(toBN(0));
+  }
+
   return formatQuantity(balance);
-}
+};
