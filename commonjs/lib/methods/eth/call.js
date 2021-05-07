@@ -77,7 +77,7 @@ exports.eth_call = async ([{ from, to, gas, gasPrice, value, data }, blockNum], 
     const body = {
         visible: true,
         contract_address: index_js_1.address.toTron(to),
-        // function_selector: "isOwnerMe()",
+        function_selector: "aggregate((address,bytes)[])",
         //
         // NOTE: passing call_value actually makes the transaction "fail" with a
         // warning message like:
@@ -88,9 +88,8 @@ exports.eth_call = async ([{ from, to, gas, gasPrice, value, data }, blockNum], 
         //  },
         //
         //  But constant_result still contains the correct result, lol!
-        call_value: index_js_1.hexToNumber(value || "0x0"),
-        data: data.substr(2),
-        // TODO: we can remove `parameter` actually...
+        //call_value: index_js_1.hexToNumber(value || "0x0"),
+        //data: data.substr(2),
         parameter,
     };
     if (from) {

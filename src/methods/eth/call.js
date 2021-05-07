@@ -85,7 +85,8 @@ export const eth_call = async (
   const body = {
     visible: true,
     contract_address: ethAddress.toTron(to),
-    // function_selector: "isOwnerMe()",
+    // aggregate
+    function_selector: "aggregate((address,bytes)[])",
     //
     // NOTE: passing call_value actually makes the transaction "fail" with a
     // warning message like:
@@ -96,9 +97,8 @@ export const eth_call = async (
     //  },
     //
     //  But constant_result still contains the correct result, lol!
-    call_value: hexToNumber(value || "0x0"),
-    data: data.substr(2), // strip leading 0x
-    // TODO: we can remove `parameter` actually...
+    //call_value: hexToNumber(value || "0x0"),
+    //data: data.substr(2), // strip leading 0x
     parameter,
   };
   if (from) {
