@@ -8,8 +8,8 @@ const axios_1 = __importDefault(require("axios"));
 function networkToTronApiUrl(network = "mainnet") {
     switch (network) {
         case "mainnet":
-//            return "https://api.trongrid.io";
-            return "https://java-tron.opentron.org";
+            return "https://api.trongrid.io";
+//            return "https://java-tron.opentron.org";
         case "shasta":
             return "https://api.shasta.trongrid.io";
         case "nile":
